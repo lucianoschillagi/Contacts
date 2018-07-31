@@ -1,0 +1,6 @@
+framework module Pods_IguanaFixChallenge {
+  umbrella header "Pods-IguanaFixChallenge-umbrella.h"
+
+  export *
+  module * { export * }
+}
