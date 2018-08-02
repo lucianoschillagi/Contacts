@@ -10,25 +10,87 @@ import UIKit
 
 class ContactDetailViewController: UIViewController {
 	
+	//*****************************************************************
+	// MARK: - IBOutlets
+	//*****************************************************************
 	
-	// var movie: TMDBMovie?
-	var contact: [[String:Any]] = []
+	@IBOutlet weak var contactPhoto: UIImageView!
+	@IBOutlet weak var firstNameLabel: UILabel!
+	@IBOutlet weak var firstNameCompletedLabel: UILabel!
+	@IBOutlet weak var lastName: UILabel!
+	@IBOutlet weak var lastNameCompleted: UILabel!
+	@IBOutlet weak var adressLabel: UILabel!
+	@IBOutlet weak var adressCompletedLabel: UILabel!
+	@IBOutlet weak var phoneLabel: UILabel!
+	@IBOutlet weak var phonoCompletedLabel: UILabel!
+	
+	//*****************************************************************
+	// MARK: - Properties
+	//*****************************************************************
+		// var movie: TMDBMovie?
+		var contact: [[String:Any]] = []
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+		var detailContact: Contact? {
+			didSet {
+				configureView()
+			}
+		}
+	
+	
+	//*****************************************************************
+	// MARK: - VC Lifecycle
+	//*****************************************************************
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		configureView()
+	}
+	
+	
+	//*****************************************************************
+	// MARK: - Methods
+	//*****************************************************************
+		func configureView() {
+//			if let detailCandy = detailCandy {
+//				if let detailDescriptionLabel = detailDescriptionLabel, let candyImageView = candyImageView {
+//					detailDescriptionLabel.text = detailCandy.name
+//					candyImageView.image = UIImage(named: detailCandy.name)
+//					title = detailCandy.category
+//				}
+//			}
+		}
+	
+	
 }
+
+//class DetailViewController: UIViewController {
+//
+//	@IBOutlet weak var detailDescriptionLabel: UILabel!
+//	@IBOutlet weak var candyImageView: UIImageView!
+//
+//	var detailCandy: Candy? {
+//		didSet {
+//			configureView()
+//		}
+//	}
+//
+//	func configureView() {
+//		if let detailCandy = detailCandy {
+//			if let detailDescriptionLabel = detailDescriptionLabel, let candyImageView = candyImageView {
+//				detailDescriptionLabel.text = detailCandy.name
+//				candyImageView.image = UIImage(named: detailCandy.name)
+//				title = detailCandy.category
+//			}
+//		}
+//	}
+//
+//	override func viewDidLoad() {
+//		super.viewDidLoad()
+//		configureView()
+//	}
+//
+//	override func didReceiveMemoryWarning() {
+//		super.didReceiveMemoryWarning()
+//	}
+//
+//}

@@ -12,10 +12,11 @@
 		A64A7116210A8ED9006F256B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64A7114210A8ED9006F256B /* Main.storyboard */; };
 		A64A7118210A8EDA006F256B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64A7117210A8EDA006F256B /* Assets.xcassets */; };
 		A64A711B210A8EDA006F256B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64A7119210A8EDA006F256B /* LaunchScreen.storyboard */; };
-		A64A7123210A8F74006F256B /* ContactosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A7122210A8F74006F256B /* ContactosViewController.swift */; };
+		A64A7123210A8F74006F256B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A7122210A8F74006F256B /* ContactsViewController.swift */; };
 		A64A712C210A8FF7006F256B /* IguanaFixClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A712B210A8FF7006F256B /* IguanaFixClient.swift */; };
 		A64A712E210A9003006F256B /* IguanaFixConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A712D210A9003006F256B /* IguanaFixConstants.swift */; };
 		A67ECA5F210E74A6008C6EE3 /* ContactObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */; };
+		A6CE49322112ADA90031053C /* ContactTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CE49312112ADA90031053C /* ContactTheme.swift */; };
 		A6F1B891210F890200719439 /* ContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1B890210F890200719439 /* ContactsCell.swift */; };
 		A6F1B894210FA3D300719439 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -29,10 +30,11 @@
 		A64A7117210A8EDA006F256B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A64A711A210A8EDA006F256B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A64A711C210A8EDA006F256B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A64A7122210A8F74006F256B /* ContactosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactosViewController.swift; sourceTree = "<group>"; };
+		A64A7122210A8F74006F256B /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A64A712B210A8FF7006F256B /* IguanaFixClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguanaFixClient.swift; sourceTree = "<group>"; };
 		A64A712D210A9003006F256B /* IguanaFixConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguanaFixConstants.swift; sourceTree = "<group>"; };
 		A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactObject.swift; path = "IguanaFixChallenge/New Group/ContactObject.swift"; sourceTree = SOURCE_ROOT; };
+		A6CE49312112ADA90031053C /* ContactTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactTheme.swift; path = View/ContactTheme.swift; sourceTree = "<group>"; };
 		A6F1B890210F890200719439 /* ContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCell.swift; sourceTree = "<group>"; };
 		A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		C639F6AC53D1E2A645093CAA /* Pods_IguanaFixChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IguanaFixChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,7 +106,7 @@
 		A64A7127210A8FB3006F256B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A64A7122210A8F74006F256B /* ContactosViewController.swift */,
+				A64A7122210A8F74006F256B /* ContactsViewController.swift */,
 				A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */,
 			);
 			path = Controller;
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				A6F1B890210F890200719439 /* ContactsCell.swift */,
+				A6CE49312112ADA90031053C /* ContactTheme.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -248,10 +251,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A64A7123210A8F74006F256B /* ContactosViewController.swift in Sources */,
+				A64A7123210A8F74006F256B /* ContactsViewController.swift in Sources */,
 				A64A7111210A8ED9006F256B /* AppDelegate.swift in Sources */,
 				A6F1B891210F890200719439 /* ContactsCell.swift in Sources */,
 				A6F1B894210FA3D300719439 /* ContactDetailViewController.swift in Sources */,
+				A6CE49322112ADA90031053C /* ContactTheme.swift in Sources */,
 				A67ECA5F210E74A6008C6EE3 /* ContactObject.swift in Sources */,
 				A64A712E210A9003006F256B /* IguanaFixConstants.swift in Sources */,
 				A64A712C210A8FF7006F256B /* IguanaFixClient.swift in Sources */,
@@ -404,7 +408,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QE68JBKWWB;
 				INFOPLIST_FILE = IguanaFixChallenge/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -424,7 +428,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QE68JBKWWB;
 				INFOPLIST_FILE = IguanaFixChallenge/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

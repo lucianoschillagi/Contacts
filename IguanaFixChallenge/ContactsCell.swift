@@ -11,7 +11,7 @@ import UIKit
 class ContactsCell: UITableViewCell {
 	
 	// el nombre de un contacto
-	@IBOutlet weak var contactNameLabel: UILabel!
+	@IBOutlet weak var label: UILabel!
 	
 	
 
