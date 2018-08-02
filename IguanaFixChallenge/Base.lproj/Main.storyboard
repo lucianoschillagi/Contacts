@@ -30,7 +30,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-M2-eBy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-M2-eBy">
                                                     <rect key="frame" x="15" y="11" width="288" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -65,7 +65,7 @@
                     <navigationItem key="navigationItem" id="B2i-gM-Cib"/>
                     <connections>
                         <outlet property="activityIndicator" destination="e7T-A4-ljP" id="HVY-Ow-nA1"/>
-                        <outlet property="contactsTableView" destination="Flm-FF-deb" id="kwp-y7-cR2"/>
+                        <outlet property="tableView" destination="Flm-FF-deb" id="kwp-y7-cR2"/>
                         <segue destination="IaX-A4-Pq7" kind="showDetail" identifier="showDetail" id="8OA-dX-k3z"/>
                     </connections>
                 </viewController>

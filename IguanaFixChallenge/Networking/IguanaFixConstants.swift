@@ -16,8 +16,6 @@ Almacena...
 
 extension IguanaFixClient {
 	
-	struct Constants {
-		
 		// request
 		static let ApiURL = "https://private-d0cc1-iguanafixtest.apiary-mock.com/contacts"
 		static let ApiScheme = "https"
@@ -30,11 +28,11 @@ extension IguanaFixClient {
 			
 			static let FirstName = "first_name"
 			static let LastName = "last_name"
-			
+			static let Photo = "photo"
 		}
 		
 		
-	}
+	
 	
 }
 
