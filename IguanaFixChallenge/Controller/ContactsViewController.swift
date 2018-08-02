@@ -61,7 +61,9 @@ class ContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		
+		// 'ContactsViewController' pasa a ser delegado de 'search controller'
+		searchController.searchBar.delegate = self
+			
 		// solicita los contactos al servidor
 		getContactsObjetcs()
 			
@@ -94,6 +96,10 @@ class ContactsViewController: UIViewController {
 	
 	
 	override func viewWillAppear(_ animated: Bool) {
+		
+		activityIndicator.alpha = 1.0
+		activityIndicator.startAnimating()
+		
 		if splitViewController!.isCollapsed {
 			if let selectionIndexPath = self.contactsTableView.indexPathForSelectedRow {
 				self.contactsTableView.deselectRow(at: selectionIndexPath, animated: animated)
@@ -125,6 +131,9 @@ class ContactsViewController: UIViewController {
 				// 2.  almacena la respuesta del servidor (response.result.value) en la constante 'jsonObjectResult' 📦
 				if let jsonObjectResult = response.result.value {
 					
+					self.activityIndicator.alpha = 0.0
+					self.activityIndicator.stopAnimating()
+					
 					// imprime el resultado
 					print("👏\(jsonObjectResult)")
 					
@@ -151,7 +160,7 @@ class ContactsViewController: UIViewController {
 					}
 					
 					// 6. por último, es necesario que recarguemos la TableView, usando la función reloadData(), para que nuestra TableView pueda mostrar los datos que acabamos de recuperar del servidor.
-					//self.contactsTableView.reloadData()
+					self.contactsTableView.reloadData()
 					
 				}
 			
@@ -171,7 +180,7 @@ class ContactsViewController: UIViewController {
 	
 	
 	// task: filtrar contenido según el texto de búsqueda 👏
-	func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+	func filterContentForSearchText(_ searchText: String) {
 		filteredContacts = contacts.filter({( contact : Contact) -> Bool in
 			return contact.firstName.lowercased().contains(searchText.lowercased())
 		})
@@ -221,7 +230,7 @@ class ContactsViewController: UIViewController {
 
 extension ContactsViewController: UITableViewDataSource {
 
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return contacts.count }
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return contactsJSONArray.count }
 	
 	// task: determinar si se están filtrando resultados o no
 	func isFiltering() -> Bool {
@@ -232,19 +241,19 @@ extension ContactsViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-//		let cellReuseIdentifier = "ContactsTableViewCell"
-//		_ = contactsJSONArray[(indexPath as NSIndexPath).row]
-//		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ContactsCell
-//		let completeName = self.firstNameArray[indexPath.row] + " " + self.lastNameArray[indexPath.row]
-//		cell.contactNameLabel.text = completeName
+		let cellReuseIdentifier = "ContactsTableViewCell"
+		_ = contactsJSONArray[(indexPath as NSIndexPath).row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ContactsCell
+		let completeName = self.firstNameArray[indexPath.row] + " " + self.lastNameArray[indexPath.row]
+		cell.label.text = completeName
 		
-				let cellReuseIdentifier = "ContactsTableViewCell"
-				_ = contacts[(indexPath as NSIndexPath).row]
-				let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ContactsCell
-				let contact = contacts[indexPath.row]
-		
-			// asigna al texto de la etiqueta de CADA celda, el nombre del contacto correspondiente
-			cell.label!.text = contact.firstName + " " + contact.lastName
+//				let cellReuseIdentifier = "ContactsTableViewCell"
+//				_ = contacts[(indexPath as NSIndexPath).row]
+//				let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ContactsCell
+//				let contact = contacts[indexPath.row]
+//
+//			// asigna al texto de la etiqueta de CADA celda, el nombre del contacto correspondiente
+//			cell.label!.text = contact.firstName + " " + contact.lastName
 
 
 		return cell
@@ -310,7 +319,7 @@ extension ContactsViewController: UISearchBarDelegate {
 	// task: indicar qué botón de ´alcance´ (scope) ha sido seleccionado
 	func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
 		// le pasa a este método el índice del ´botón de alcance´ que fue seleccionado
-		filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+		filterContentForSearchText(searchBar.text!)
 	}
 }
 
