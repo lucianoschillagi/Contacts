@@ -10,12 +10,6 @@
 Una objeto preparada para recibir, mapear y almacenar (para usar cuando sea necesario) los datos de los contactos.
 */
 
-
-//let firstName: String
-//let lastName: String
-//let photo: String?
-//let phone: String?
-
 import Foundation
 
 
