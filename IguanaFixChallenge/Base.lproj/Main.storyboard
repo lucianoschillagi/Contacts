@@ -41,7 +41,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="label" destination="g4D-M2-eBy" id="8Rr-Br-LGO"/>
-                                            <segue destination="IaX-A4-Pq7" kind="showDetail" id="z06-HL-wLU"/>
+                                            <segue destination="IaX-A4-Pq7" kind="showDetail" identifier="showDetail" id="z06-HL-wLU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -99,7 +99,6 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RUK-ug-ocG">
                                 <rect key="frame" x="98" y="91" width="179" height="141"/>
-                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="141" id="zgp-8r-VgB"/>
                                 </constraints>
@@ -168,8 +167,8 @@
                     <navigationItem key="navigationItem" id="GHv-8r-msU"/>
                     <connections>
                         <outlet property="contactPhoto" destination="RUK-ug-ocG" id="YkW-Jv-4BK"/>
-                        <outlet property="firstNameCompletedLabel" destination="oR6-X0-cMF" id="kAJ-c0-led"/>
-                        <outlet property="firstNameLabel" destination="jek-X6-nuU" id="Tkp-WA-QRi"/>
+                        <outlet property="nameCompletedLabel" destination="oR6-X0-cMF" id="kAJ-c0-led"/>
+                        <outlet property="nameLabel" destination="jek-X6-nuU" id="Tkp-WA-QRi"/>
                         <outlet property="phoneLabel" destination="jN2-jD-zQc" id="rmb-HJ-hVe"/>
                         <outlet property="phonoCompletedLabel" destination="fML-9Y-Aiu" id="ji9-0H-DVA"/>
                     </connections>

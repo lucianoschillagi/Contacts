@@ -45,7 +45,6 @@ class ContactsViewController: UIViewController {
 	// esconde la barra de estado
 	override var prefersStatusBarHidden: Bool { return true }
 	
-	
 	//*****************************************************************
 	// MARK: - VC Life Cycle
 	//*****************************************************************
@@ -62,6 +61,7 @@ class ContactsViewController: UIViewController {
 			// poner el 'contact detail view controller' #NAVIGATION
 			setContactDetailVC()
 			
+			// activar el indicador de actividad
 			startActivityIndicator()
 
 	}
@@ -88,7 +88,7 @@ class ContactsViewController: UIViewController {
 		// 1. realiza la llamada a la API, a través de la función request() de Alamofire, utilizando la URL de Iguana Fix (Apiary) 🚀
 		Alamofire.request(IguanaFixClient.ApiURL).responseJSON { response in
 			
-			// MARK: response status code
+			// response status code
 			if let status = response.response?.statusCode {
 				switch(status){
 				case 200:
@@ -97,7 +97,6 @@ class ContactsViewController: UIViewController {
 					print("error with response status: \(status)")
 				}
 			}
-			
 				// 2.  almacena la respuesta del servidor (response.result.value) en la constante 'jsonObjectResult' 📦
 				if let jsonObjectResult = response.result.value {
 					
@@ -108,8 +107,6 @@ class ContactsViewController: UIViewController {
 					let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
 					// asigna los resultados de los contactos obtenidos al array 'allContacts'
 					self.allContacts = resultsContacts
-					print("🗿\(self.allContacts)")
-					
 					
 					// 4. por último, es necesario que recarguemos la TableView, usando la función reloadData(), para que nuestra TableView pueda mostrar los datos que acabamos de recuperar del servidor.
 					self.tableView.reloadData()
@@ -128,7 +125,6 @@ class ContactsViewController: UIViewController {
 	
 	// task: configurar al controlador de búsqueda
 	func setupSearchController() {
-		//searchController.searchBar.delegate = self  // 'ContactsViewController' pasa a ser delegado de 'search controller'
 		searchController.searchResultsUpdater = self
 		searchController.obscuresBackgroundDuringPresentation = false
 		searchController.searchBar.placeholder = "Search Contacts"
@@ -148,6 +144,7 @@ class ContactsViewController: UIViewController {
 			return contact.firstName.lowercased().contains(searchText.lowercased())
 		})
 		tableView.reloadData()
+		debugPrint("Los contactos filtrados actualmente son: \(filteredContacts)")
 	}
 	
 	// task: determinar si actualmente se están filtrando resultados o no
@@ -172,21 +169,23 @@ class ContactsViewController: UIViewController {
 	//*****************************************************************
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
 		if segue.identifier == "showDetail" {
+			// pasa el index path de la fila seleccionada en la tabla
 			if let indexPath = tableView.indexPathForSelectedRow {
-
-				// esta pieza provee el array de correspondiente a la lógica, si está filtrando
-				// provee el index path de ese array, caso contrario del index path del array con todos los contactos
-
 				// el contacto seleccionado
 				let contact: Contact
+				// si está filtrando provee el array de los contactos filtrados
 				if isFiltering() {
 					contact = filteredContacts[indexPath.row]
 				} else {
+					// caso contrario, el de todos los contactos
 					contact = allContacts[indexPath.row]
 				}
-
+				debugPrint("Los datos del contacto seleccionado son: \(contact.firstName)")
+				// navega hacia el vc de detalle
 				let controller = (segue.destination as! UINavigationController).topViewController as! ContactDetailViewController
+				// le pasa a la propiedad 'detailContact' de 'ContactDetailViewController' el objeto correspondiente a la dirección del array correspondiente
 				controller.detailContact = contact
 				controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 				controller.navigationItem.leftItemsSupplementBackButton = true
@@ -195,7 +194,6 @@ class ContactsViewController: UIViewController {
 	}
 	
 
-	
 	func setContactDetailVC() {
 		if let splitViewController = splitViewController {
 			let controllers = splitViewController.viewControllers
@@ -215,7 +213,8 @@ class ContactsViewController: UIViewController {
 	//*****************************************************************
 
 extension ContactsViewController: UITableViewDataSource {
-
+	
+	// task: determinar la cantidad de celdas que mostrará la tabla
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		// si está filtrando, contar el array que contiene los elementos filtrados
@@ -227,12 +226,13 @@ extension ContactsViewController: UITableViewDataSource {
 		
 	}
 	
-
+	// task: configurar la celda
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cellReuseIdentifier = "ContactsTableViewCell"
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! ContactsCell
 		
+		// instancia del objeto 'Contacto'
 		let contact: Contact
 		// muestra el array con todos los resultados o con los filtrados según si el usuario esté filtrando o no
 		if isFiltering() {
@@ -246,12 +246,17 @@ extension ContactsViewController: UITableViewDataSource {
 		return cell
 	}
 	
+	
+	
+	
 
 } // end ext
 
 
 extension ContactsViewController: UISearchResultsUpdating {
 	// MARK: - UISearchResultsUpdating Delegate
+	
+	// task: actualizar los resultados de la búsqueda del usuario
 	func updateSearchResults(for searchController: UISearchController) {
 		// le pasa a este método el texto que el usuario ingresó en la barra de búsqueda 👏
 		filterContentForSearchText(searchController.searchBar.text!)
