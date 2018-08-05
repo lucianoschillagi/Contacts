@@ -15,21 +15,27 @@ class ContactDetailViewController: UIViewController {
 	//*****************************************************************
 	
 	@IBOutlet weak var contactPhoto: UIImageView!
-	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet weak var nameCompletedLabel: UILabel!
-	@IBOutlet weak var phoneLabel: UILabel!
-	@IBOutlet weak var phonoCompletedLabel: UILabel!
+	@IBOutlet weak var userIdLabel: UILabel!
+	@IBOutlet weak var userIdValueLabel: UILabel!
+	@IBOutlet weak var createAtLabel: UILabel!
+	@IBOutlet weak var createdAtValueLabel: UILabel!
+	@IBOutlet weak var birthDateLabel: UILabel!
+	@IBOutlet weak var birthDateValueLabel: UILabel!
+	@IBOutlet weak var firstNameLabel: UILabel!
+	@IBOutlet weak var firstNameValueLabel: UILabel!
+	@IBOutlet weak var lastNameLabel: UILabel!
+	@IBOutlet weak var lastNameValueLabel: UILabel!
+	@IBOutlet weak var phonoTypeLabel: UILabel!
+	@IBOutlet weak var phonoTypeValueLabel: UILabel!
+	@IBOutlet weak var phonoNumberLabel: UILabel!
+	@IBOutlet weak var phonoNumberValueLabel: UILabel!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	//*****************************************************************
 	// MARK: - Properties
 	//*****************************************************************
 
-		var detailContact: Contact? {
-			didSet {
-				configureView()
-			}
-		}
-	
+		var detailContact: Contact?
 	
 	//*****************************************************************
 	// MARK: - VC Lifecycle
@@ -43,36 +49,34 @@ class ContactDetailViewController: UIViewController {
 	// MARK: - Methods
 	//*****************************************************************
 	
-	// task: configurar las vistas
+	// task: configurar las vistas con los datos obtenidos en la solicitud web ('Contact' object)
 	func configureView() {
-			if let detailContact = detailContact {
-				if let nameCompletedLabel = nameCompletedLabel, let contactPhoto = contactPhoto {
-					nameCompletedLabel.text = detailContact.firstName + " " + detailContact.lastName
-					contactPhoto.image = UIImage(named:detailContact.photo)
+		
+		if let detailContact = detailContact {
+				if let contactPhoto = contactPhoto, let userIdValueLabel = userIdValueLabel, let createdIdValueLabel = createdAtValueLabel, let birthDateValueLabel = birthDateValueLabel, let firstNameValueLabel = firstNameValueLabel, let lastNameValueLabel = lastNameValueLabel, let phonoTypeValueLabel = phonoTypeValueLabel, let phonoNumberValueLabel = phonoNumberValueLabel {
 					
-					// create url
-					let photoUrl = URL(string: detailContact.photo)!
-					debugPrint("el url de la foto es \(photoUrl)")
-					// create network request
-					let task = URLSession.shared.dataTask(with: photoUrl) { (data, response, error) in
-						debugPrint("data: \(data), response \(response), error \(error)")
+					userIdValueLabel.text = detailContact.userID
+					createdIdValueLabel.text = detailContact.createdAt
+					birthDateValueLabel.text = detailContact.birthDate
+					firstNameValueLabel.text = detailContact.firstName
+					lastNameValueLabel.text = detailContact.lastName
+					phonoTypeValueLabel.text = detailContact.phonoType
+					phonoNumberValueLabel.text = detailContact.phonoNumber
+	
+					contactPhoto.image = UIImage(named:detailContact.thumb!)
+					let thumbUrl = URL(string: detailContact.thumb!)!
+					let task = URLSession.shared.dataTask(with: thumbUrl) { (data, response, error) in
+						self.startActivityIndicator()
 						if error == nil {
-							debugPrint("los datos de la foto son \(data)")
-							// create image
 							let downloadedImage = UIImage(data: data!)
-							debugPrint("🚀\(downloadedImage)")
-							self.contactPhoto.image = downloadedImage
-							// update UI on a main thread
 							DispatchQueue.main.async {
-								
-								//self.contactPhoto.image = downloadedImage
-								
+								self.contactPhoto.image = downloadedImage
+								self.stopActivityIndicator()
 							}
 							
 						} else {
 							print(error!)
 						}
-						print(data)
 					}
 					
 					// start network request
@@ -83,5 +87,23 @@ class ContactDetailViewController: UIViewController {
 		}
 	
 	
-}
+	//*****************************************************************
+	// MARK: - Helper methods
+	//*****************************************************************
+	
+	func startActivityIndicator() {
+		DispatchQueue.main.async {
+			self.activityIndicator.alpha = 1.0
+			self.activityIndicator.startAnimating()
+		}
+	}
+	
+	func stopActivityIndicator() {
+		DispatchQueue.main.async {
+			self.activityIndicator.alpha = 0.0
+			self.activityIndicator.stopAnimating()
+		}
+	}
+	
+} // end class
 

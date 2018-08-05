@@ -55,8 +55,21 @@ class ContactsViewController: UIViewController {
 			// configura el controlador de búsqueda #SEARCH CONTROLLER
 			setupSearchController()
 			
-			// solicita los contactos al servidor #NETWORKING
-			getContactsObjetcs()
+			// solicita los contactos al servidor #NETWORKING	}
+			
+			IguanaFixClient.getContactsObject { (success, contactObject, error) in
+				
+				DispatchQueue.main.async {
+					if success {
+						self.allContacts = contactObject
+						self.tableView.reloadData()
+						self.stopActivityIndicator()
+						print("🎲\(self.allContacts)")
+					} else {
+						print(error)
+					}
+				}
+			}
 			
 			// poner el 'contact detail view controller' #NAVIGATION
 			setContactDetailVC()
@@ -82,40 +95,40 @@ class ContactsViewController: UIViewController {
 	// MARK: - Networking methods
 	//*****************************************************************
 	
-	// task: obtener un array de objetos, diccionarios que representan los datos de diferentes usuarios
-	func getContactsObjetcs() {
-	
-		// 1. realiza la llamada a la API, a través de la función request() de Alamofire, utilizando la URL de Iguana Fix (Apiary) 🚀
-		Alamofire.request(IguanaFixClient.ApiURL).responseJSON { response in
-			
-			// response status code
-			if let status = response.response?.statusCode {
-				switch(status){
-				case 200:
-					print("example success")
-				default:
-					print("error with response status: \(status)")
-				}
-			}
-				// 2.  almacena la respuesta del servidor (response.result.value) en la constante 'jsonObjectResult' 📦
-				if let jsonObjectResult = response.result.value {
-					
-					self.stopActivityIndicator()
-
-					// 3. utiliza la estructura 'contactsJSONArray' para almacenar la respuesta del servidor, especificando que se trata de un Array
-					// sabemos esto, porque conocemos la estructura que tiene nuestro json en Apiary
-					let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
-					// asigna los resultados de los contactos obtenidos al array 'allContacts'
-					self.allContacts = resultsContacts
-					
-					// 4. por último, es necesario que recarguemos la TableView, usando la función reloadData(), para que nuestra TableView pueda mostrar los datos que acabamos de recuperar del servidor.
-					self.tableView.reloadData()
-					
-				}
-			
-			}
-
-	}
+//	// task: obtener un array de objetos, diccionarios que representan los datos de diferentes usuarios
+//	func getContactsObjetcs() {
+//
+//		// 1. realiza la llamada a la API, a través de la función request() de Alamofire, utilizando la URL de Iguana Fix (Apiary) 🚀
+//		Alamofire.request(IguanaFixClient.ApiURL).responseJSON { response in
+//
+//			// response status code
+//			if let status = response.response?.statusCode {
+//				switch(status){
+//				case 200:
+//					print("example success")
+//				default:
+//					print("error with response status: \(status)")
+//				}
+//			}
+//				// 2.  almacena la respuesta del servidor (response.result.value) en la constante 'jsonObjectResult' 📦
+//				if let jsonObjectResult = response.result.value {
+//
+//					self.stopActivityIndicator()
+//
+//					// 3. utiliza la estructura 'contactsJSONArray' para almacenar la respuesta del servidor, especificando que se trata de un Array
+//					// sabemos esto, porque conocemos la estructura que tiene nuestro json en Apiary
+//					let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
+//					// asigna los resultados de los contactos obtenidos al array 'allContacts'
+//					self.allContacts = resultsContacts
+//
+//					// 4. por último, es necesario que recarguemos la TableView, usando la función reloadData(), para que nuestra TableView pueda mostrar los datos que acabamos de recuperar del servidor.
+//					self.tableView.reloadData()
+//
+//				}
+//
+//			}
+//
+//	}
 	
 
 	
@@ -245,10 +258,6 @@ extension ContactsViewController: UITableViewDataSource {
 
 		return cell
 	}
-	
-	
-	
-	
 
 } // end ext
 

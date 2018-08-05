@@ -12,34 +12,78 @@ Una objeto preparada para recibir, mapear y almacenar (para usar cuando sea nece
 
 import Foundation
 
-
-// MARK: - TMDBMovie
-
 struct Contact {
 	
-	// MARK: Properties
 	
+	//*****************************************************************
+	// MARK: - Properties
+	//*****************************************************************
+	
+	let userID: String
+	let createdAt: String
+	let birthDate: String
 	let firstName: String
 	let lastName: String
-	let photo: String
-	//let phone: String?
+	var phones: [[String:AnyObject]]
+	var phonoType: String?
+	var phonoNumber: String?
+	var thumb: String?
+	var photo: String?
 	
-	// MARK: Initializers
+	//*****************************************************************
+	// MARK: - Initializers
+	//*****************************************************************
 	
-	// construct a TMDBMovie from a dictionary
+	// task: construir el objeto 'Contact' desde un diccionario (el JSON obtenido '[String:AnyObject]')
 	init(dictionary: [String:AnyObject]) {
+		// user id
+		userID = dictionary[IguanaFixClient.JSONResponseKeys.UserID] as! String
+		// created at
+		createdAt = dictionary[IguanaFixClient.JSONResponseKeys.CreatedAt] as! String
+		// birth date
+		birthDate = dictionary[IguanaFixClient.JSONResponseKeys.BirthDate] as! String
+		// first name
 		firstName = dictionary[IguanaFixClient.JSONResponseKeys.FirstName] as! String
+		// last name
 		lastName = dictionary[IguanaFixClient.JSONResponseKeys.LastName] as! String
-		photo = dictionary[IguanaFixClient.JSONResponseKeys.Photo] as! String
+		// phones
+		phones = dictionary["phones"] as! [Dictionary]
 		
-//		if let photoUrl = dictionaryIguanaFixClient.JSONResponseKeys.Photo] {
-//			photo = photoUrl
+		// phono type
+		if let phonesString = dictionary["phones"] as? [[String:AnyObject]] {
+			phones = phonesString
+			} else {
+			phones = [[:]]
+			}
+		
+		// phono number
+//		if let phonoNumberString = phones["number"] as? String {
+//			phonoNumber = phonoNumberString["number"] as! String
 //		} else {
-//			photo = ""
+//			phonoNumber = ""
 //		}
-		
+
+		// thumb
+		if let thumbString = dictionary[IguanaFixClient.JSONResponseKeys.Thumb] as? String {
+			thumb = thumbString
+		} else {
+			thumb = ""
+		}
+
+		// photo
+		if let photoString = dictionary[IguanaFixClient.JSONResponseKeys.Photo] as? String {
+			photo = photoString
+		} else {
+			photo = ""
+		}
+
 	}
 	
+	//*****************************************************************
+	// MARK: - Methods
+	//*****************************************************************
+	
+	// task: transformar al resultado obtenido (array de objetos JSON) en un array de objetos Foundation 'Contacto'
 	static func contactsFromResults(_ results: [[String:AnyObject]]) -> [Contact] {
 		
 		var contacts = [Contact]()
@@ -51,6 +95,8 @@ struct Contact {
 		
 		return contacts
 	}
+	
+	static var allContacts: [Contact] = [Contact]()
 }
 
 
