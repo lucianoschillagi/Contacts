@@ -16,8 +16,10 @@
 		A64A712C210A8FF7006F256B /* IguanaFixClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A712B210A8FF7006F256B /* IguanaFixClient.swift */; };
 		A64A712E210A9003006F256B /* IguanaFixConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A712D210A9003006F256B /* IguanaFixConstants.swift */; };
 		A67ECA5F210E74A6008C6EE3 /* ContactObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */; };
+		A6981FE62117F79D00998214 /* ContactVC_Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6981FE52117F79D00998214 /* ContactVC_Helpers.swift */; };
 		A6CE49322112ADA90031053C /* ContactTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CE49312112ADA90031053C /* ContactTheme.swift */; };
-		A6E1ACC52117F22500318A43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1ACC42117F22500318A43 /* Reachability.swift */; };
+		A6E1ACCF2117F3B900318A43 /* Connection_Possibilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1ACCE2117F3B900318A43 /* Connection_Possibilities.swift */; };
+		A6E1ACD12117F3D500318A43 /* DisplayErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1ACD02117F3D500318A43 /* DisplayErrors.swift */; };
 		A6F1B891210F890200719439 /* ContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1B890210F890200719439 /* ContactsCell.swift */; };
 		A6F1B894210FA3D300719439 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,9 +36,13 @@
 		A64A7122210A8F74006F256B /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A64A712B210A8FF7006F256B /* IguanaFixClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguanaFixClient.swift; sourceTree = "<group>"; };
 		A64A712D210A9003006F256B /* IguanaFixConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguanaFixConstants.swift; sourceTree = "<group>"; };
-		A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactObject.swift; path = "IguanaFixChallenge/New Group/ContactObject.swift"; sourceTree = SOURCE_ROOT; };
+		A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactObject.swift; path = IguanaFixChallenge/Model/ContactObject.swift; sourceTree = SOURCE_ROOT; };
+		A6981FE52117F79D00998214 /* ContactVC_Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactVC_Helpers.swift; sourceTree = "<group>"; };
 		A6CE49312112ADA90031053C /* ContactTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactTheme.swift; path = View/ContactTheme.swift; sourceTree = "<group>"; };
-		A6E1ACC42117F22500318A43 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../../../../../../.Trash/Reachability.swift; sourceTree = "<group>"; };
+		A6E1ACCD2117F35C00318A43 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		A6E1ACCE2117F3B900318A43 /* Connection_Possibilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection_Possibilities.swift; sourceTree = "<group>"; };
+		A6E1ACD02117F3D500318A43 /* DisplayErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayErrors.swift; sourceTree = "<group>"; };
+		A6E391432118EECF00D0C598 /* tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tests.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A6F1B890210F890200719439 /* ContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCell.swift; sourceTree = "<group>"; };
 		A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		C639F6AC53D1E2A645093CAA /* Pods_IguanaFixChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IguanaFixChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +105,7 @@
 				A6F1B892210F890B00719439 /* View */,
 				A64A712A210A8FD9006F256B /* Networking */,
 				A64A7117210A8EDA006F256B /* Assets.xcassets */,
+				A6E391432118EECF00D0C598 /* tests.playground */,
 				A64A7119210A8EDA006F256B /* LaunchScreen.storyboard */,
 				A64A711C210A8EDA006F256B /* Info.plist */,
 			);
@@ -109,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				A64A7122210A8F74006F256B /* ContactsViewController.swift */,
+				A6981FE52117F79D00998214 /* ContactVC_Helpers.swift */,
 				A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */,
 			);
 			path = Controller;
@@ -119,7 +127,7 @@
 			children = (
 				A64A712B210A8FF7006F256B /* IguanaFixClient.swift */,
 				A64A712D210A9003006F256B /* IguanaFixConstants.swift */,
-				A6E1ACC42117F22500318A43 /* Reachability.swift */,
+				A6E1ACCC2117F35B00318A43 /* Internet Connection */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -129,7 +137,17 @@
 			children = (
 				A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */,
 			);
-			name = Model;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A6E1ACCC2117F35B00318A43 /* Internet Connection */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1ACCD2117F35C00318A43 /* Reachability.swift */,
+				A6E1ACCE2117F3B900318A43 /* Connection_Possibilities.swift */,
+				A6E1ACD02117F3D500318A43 /* DisplayErrors.swift */,
+			);
+			name = "Internet Connection";
 			path = "New Group";
 			sourceTree = "<group>";
 		};
@@ -255,12 +273,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A64A7123210A8F74006F256B /* ContactsViewController.swift in Sources */,
+				A6981FE62117F79D00998214 /* ContactVC_Helpers.swift in Sources */,
 				A64A7111210A8ED9006F256B /* AppDelegate.swift in Sources */,
 				A6F1B891210F890200719439 /* ContactsCell.swift in Sources */,
+				A6E1ACD12117F3D500318A43 /* DisplayErrors.swift in Sources */,
 				A6F1B894210FA3D300719439 /* ContactDetailViewController.swift in Sources */,
 				A6CE49322112ADA90031053C /* ContactTheme.swift in Sources */,
-				A6E1ACC52117F22500318A43 /* Reachability.swift in Sources */,
 				A67ECA5F210E74A6008C6EE3 /* ContactObject.swift in Sources */,
+				A6E1ACCF2117F3B900318A43 /* Connection_Possibilities.swift in Sources */,
 				A64A712E210A9003006F256B /* IguanaFixConstants.swift in Sources */,
 				A64A712C210A8FF7006F256B /* IguanaFixClient.swift in Sources */,
 			);

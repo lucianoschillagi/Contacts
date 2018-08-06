@@ -6,7 +6,13 @@
 //  Copyright © 2018 luko. All rights reserved.
 //
 
+/* Controller */
+
 import UIKit
+
+/* Abstract:
+El detalle del contacto seleccionado.
+*/
 
 class ContactDetailViewController: UIViewController {
 	
