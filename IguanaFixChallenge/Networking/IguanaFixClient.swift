@@ -41,10 +41,6 @@ class IguanaFixClient {
 				let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
 				// asigna los resultados de los contactos obtenidos al array 'allContacts'
 				completionHandlerForContactObject(true, resultsContacts, nil)
-				//Contact.allContacts = resultsContacts
-				
-				// 4. por último, es necesario que recarguemos la TableView, usando la función reloadData(), para que nuestra TableView pueda mostrar los datos que acabamos de recuperar del servidor.
-				//self.tableView.reloadData()
 				
 			}
 			

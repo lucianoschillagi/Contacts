@@ -96,7 +96,6 @@ struct Contact {
 		return contacts
 	}
 	
-	static var allContacts: [Contact] = [Contact]()
 }
 
 

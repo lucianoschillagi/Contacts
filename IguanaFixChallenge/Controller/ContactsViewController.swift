@@ -42,6 +42,16 @@ class ContactsViewController: UIViewController {
 	// una array que contiene los SÓLO los contactos filtrados
 	var filteredContacts = [Contact]()
 	
+	// Index Table View
+	// un array que contiene los nombres de los contactos
+	var contactNames = [String]()
+	// un array que contiene el nombre de los contactos FILTRADOS
+	var filteredContactNames = [String]()
+	// el index y los nombres de TODOS los contactos que contiene cada letra del index
+	var contactNamesDictionary = [String: [String]]()
+	// los títulos de cada sección del index
+	var conctactNamesSectionTitles = [String]()
+	
 	// esconde la barra de estado
 	override var prefersStatusBarHidden: Bool { return true }
 	
@@ -55,28 +65,14 @@ class ContactsViewController: UIViewController {
 			// configura el controlador de búsqueda #SEARCH CONTROLLER
 			setupSearchController()
 			
-			// solicita los contactos al servidor #NETWORKING	}
-			
-			IguanaFixClient.getContactsObject { (success, contactObject, error) in
-				
-				DispatchQueue.main.async {
-					if success {
-						self.allContacts = contactObject
-						self.tableView.reloadData()
-						self.stopActivityIndicator()
-						print("🎲\(self.allContacts)")
-					} else {
-						print(error)
-					}
-				}
-			}
+			// solicita los contactos al servidor #NETWORKING	🚀
+			startRequest()
 			
 			// poner el 'contact detail view controller' #NAVIGATION
 			setContactDetailVC()
 			
 			// activar el indicador de actividad
 			startActivityIndicator()
-
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -89,48 +85,27 @@ class ContactsViewController: UIViewController {
 		super.viewWillAppear(animated)
 	}
 	
-	
-	
 	//*****************************************************************
 	// MARK: - Networking methods
 	//*****************************************************************
 	
-//	// task: obtener un array de objetos, diccionarios que representan los datos de diferentes usuarios
-//	func getContactsObjetcs() {
-//
-//		// 1. realiza la llamada a la API, a través de la función request() de Alamofire, utilizando la URL de Iguana Fix (Apiary) 🚀
-//		Alamofire.request(IguanaFixClient.ApiURL).responseJSON { response in
-//
-//			// response status code
-//			if let status = response.response?.statusCode {
-//				switch(status){
-//				case 200:
-//					print("example success")
-//				default:
-//					print("error with response status: \(status)")
-//				}
-//			}
-//				// 2.  almacena la respuesta del servidor (response.result.value) en la constante 'jsonObjectResult' 📦
-//				if let jsonObjectResult = response.result.value {
-//
-//					self.stopActivityIndicator()
-//
-//					// 3. utiliza la estructura 'contactsJSONArray' para almacenar la respuesta del servidor, especificando que se trata de un Array
-//					// sabemos esto, porque conocemos la estructura que tiene nuestro json en Apiary
-//					let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
-//					// asigna los resultados de los contactos obtenidos al array 'allContacts'
-//					self.allContacts = resultsContacts
-//
-//					// 4. por último, es necesario que recarguemos la TableView, usando la función reloadData(), para que nuestra TableView pueda mostrar los datos que acabamos de recuperar del servidor.
-//					self.tableView.reloadData()
-//
-//				}
-//
-//			}
-//
-//	}
-	
-
+	// task: obtener un array de objetos, diccionarios que representan los datos de diferentes usuarios
+	func startRequest(){
+		
+		IguanaFixClient.getContactsObject { (success, contactObject, error) in
+			
+			DispatchQueue.main.async {
+				if success {
+					self.allContacts = contactObject
+					self.getContactNames()
+					self.tableView.reloadData()
+					self.stopActivityIndicator()
+				} else {
+					print(error)
+				}
+			}
+		}
+	}
 	
 	//*****************************************************************
 	// MARK: - Helper methods
@@ -165,6 +140,69 @@ class ContactsViewController: UIViewController {
 		return searchController.isActive && !searchBarIsEmpty()
 	}
 	
+	
+	// task: rellenar la propiedad 'contactNames' con los nombres de todos los contactos 👏
+	func getContactNames() {
+		
+		// si está fitrando...
+		if isFiltering() {
+			
+			for filteredContactName in self.filteredContacts {
+				let fullName = filteredContactName.lastName + " " + filteredContactName.firstName
+				self.filteredContactNames.append(fullName)
+				debugPrint("😅 Este es el listado de los nombres filtrados: \(self.filteredContactNames)")
+			}
+			
+			// si NO está filtrando
+		} else {
+			
+			for contactName in self.allContacts {
+				let fullName = contactName.lastName + " " + contactName.firstName
+				self.contactNames.append(fullName)
+				debugPrint("🍎 Este es el listado de los nombres completos: \(self.contactNames)")
+			}
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		getInitialOfTheNames()
+	}
+	
+	// task: obtener las iniciales de los nombres
+	func getInitialOfTheNames() {
+		
+		// para luego indexar la table
+		// itera el array 'contact names'
+		for name in self.contactNames {
+			// extrae la inicial de cada nombre
+			let nameKey = String(name.prefix(1))
+			// y se usa como clave de ´contactNamesDictionary´
+			if var nameValues = contactNamesDictionary[nameKey] {
+				// 2-o si la clave ya existe, agrega ese nuevo nombre al array
+				nameValues.append(name)
+				contactNamesDictionary[nameKey] = nameValues
+			} else {
+				// 1-con esta clave se crea una nueva serie de nombres
+				contactNamesDictionary[nameKey] = [name]
+			}
+			
+		}
+		debugPrint("😛\(self.contactNamesDictionary)")
+		// asigna las claves de cada sección a las claves de cada uno de los elementos del diccionario 🔌
+		conctactNamesSectionTitles = [String](contactNamesDictionary.keys)
+		conctactNamesSectionTitles = conctactNamesSectionTitles.sorted(by: { $0 < $1 })
+		debugPrint("las iniciales de las secciones son las siguientes: \(conctactNamesSectionTitles)")
+		
+	}
+	
 	func startActivityIndicator() {
 		activityIndicator.alpha = 1.0
 		activityIndicator.startAnimating()
@@ -175,8 +213,6 @@ class ContactsViewController: UIViewController {
 		self.activityIndicator.stopAnimating()
 	}
 
-	
-	
 	//*****************************************************************
 	// MARK: - Navigation
 	//*****************************************************************
@@ -212,13 +248,9 @@ class ContactsViewController: UIViewController {
 			let controllers = splitViewController.viewControllers
 			detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ContactDetailViewController
 		}
-	
-	
 	}
 	
 } // end class
-
-
 
 
 	//*****************************************************************
@@ -227,15 +259,34 @@ class ContactsViewController: UIViewController {
 
 extension ContactsViewController: UITableViewDataSource {
 	
-	// task: determinar la cantidad de celdas que mostrará la tabla
+	// task: determinar la cantidad de secciones que tendrá la table
+	func numberOfSections(in tableView: UITableView) -> Int {
+		// 1- la cantidad de secciones se corresponde con la cantidad de títulos de sección por nombre
+		return conctactNamesSectionTitles.count
+	}
+	
+	
+	// task: determinar la cantidad de celdas que mostrará la tabla en cada sección
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		// si está filtrando, contar el array que contiene los elementos filtrados
-		if isFiltering() {
-			return filteredContacts.count
+//		// si está filtrando, contar el array que contiene los elementos filtrados
+//		if isFiltering() {
+//			return filteredContacts.count
+//		}
+//		// sino, contar el array que contiene todos los elementos
+//		return allContacts.count
+		
+		
+		let nameKey = conctactNamesSectionTitles[section]
+		if let nameValues = contactNamesDictionary[nameKey] {
+			return nameValues.count
 		}
-		// sino, contar el array que contiene todos los elementos
-		return allContacts.count
+		
+		return 0
+		
+		
+		
+		
 		
 	}
 	
@@ -245,19 +296,37 @@ extension ContactsViewController: UITableViewDataSource {
 		let cellReuseIdentifier = "ContactsTableViewCell"
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! ContactsCell
 		
-		// instancia del objeto 'Contacto'
-		let contact: Contact
-		// muestra el array con todos los resultados o con los filtrados según si el usuario esté filtrando o no
-		if isFiltering() {
-			contact = filteredContacts[indexPath.row]
-		} else {
-			contact = allContacts[indexPath.row]
-		}
-			let completeName = contact.firstName + " " + contact.lastName
-			cell.label.text = completeName
+//		// instancia del objeto 'Contacto'
+//		let contact: Contact
+//		// muestra el array con todos los resultados o con los filtrados según si el usuario esté filtrando o no
+//		if isFiltering() {
+//			contact = filteredContacts[indexPath.row]
+//		} else {
+//			contact = allContacts[indexPath.row]
+//		}
+//			let completeName = contact.firstName + " " + contact.lastName
+//			cell.label.text = completeName
 
+		// Configure the cell...
+		let nameKey = conctactNamesSectionTitles[indexPath.section]
+		if let nameValue = contactNamesDictionary[nameKey] {
+			cell.textLabel?.text = nameValue[indexPath.row]
+		}
+		
+		
 		return cell
 	}
+	
+	// task: mostrar el encabezado de cada sección
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return conctactNamesSectionTitles[section]
+	}
+
+	// task: agregar el indexado de la tabla (vista del borde izquierdo)
+	func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+		return conctactNamesSectionTitles
+	}
+	
 
 } // end ext
 
