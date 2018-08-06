@@ -96,12 +96,14 @@ class ContactsViewController: UIViewController {
 			
 			DispatchQueue.main.async {
 				if success {
-					self.allContacts = contactObject
-					self.getContactNames()
-					self.tableView.reloadData()
-					self.stopActivityIndicator()
-				} else {
-					print(error)
+					if let contactObject = contactObject {
+						self.allContacts = contactObject
+						}
+						self.getContactNames()
+						self.tableView.reloadData()
+						self.stopActivityIndicator()
+					} else {
+						self.displayAlertView(nil, error)
 				}
 			}
 		}
@@ -250,7 +252,40 @@ class ContactsViewController: UIViewController {
 		}
 	}
 	
+	
+	//*****************************************************************
+	// MARK: - Alert View
+	//*****************************************************************
+	
+	/**
+	Muestra al usuario un mensaje acerca de porqué la solicitud falló.
+	
+	- Parameter title: El título del error.
+	- Parameter message: El mensaje acerca del error.
+	
+	*/
+	func displayAlertView(_ title: String? = "Request Error", _ error: String?) {
+		
+		// si ocurre un error en la solicitud, mostrar una vista de alerta
+		if error != nil {
+			
+			let alertController = UIAlertController(title: title, message: error, preferredStyle: .alert)
+			let OKAction = UIAlertAction(title: "OK", style: .default) { action in
+				
+			}
+			alertController.addAction(OKAction)
+			self.present(alertController, animated: true) {}
+		}
+	}
+	
+	
+	
+	
 } // end class
+
+
+
+
 
 
 	//*****************************************************************

@@ -17,6 +17,7 @@
 		A64A712E210A9003006F256B /* IguanaFixConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64A712D210A9003006F256B /* IguanaFixConstants.swift */; };
 		A67ECA5F210E74A6008C6EE3 /* ContactObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */; };
 		A6CE49322112ADA90031053C /* ContactTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CE49312112ADA90031053C /* ContactTheme.swift */; };
+		A6E1ACC52117F22500318A43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1ACC42117F22500318A43 /* Reachability.swift */; };
 		A6F1B891210F890200719439 /* ContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1B890210F890200719439 /* ContactsCell.swift */; };
 		A6F1B894210FA3D300719439 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		A64A712D210A9003006F256B /* IguanaFixConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguanaFixConstants.swift; sourceTree = "<group>"; };
 		A67ECA5E210E74A6008C6EE3 /* ContactObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactObject.swift; path = "IguanaFixChallenge/New Group/ContactObject.swift"; sourceTree = SOURCE_ROOT; };
 		A6CE49312112ADA90031053C /* ContactTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactTheme.swift; path = View/ContactTheme.swift; sourceTree = "<group>"; };
+		A6E1ACC42117F22500318A43 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../../../../../../.Trash/Reachability.swift; sourceTree = "<group>"; };
 		A6F1B890210F890200719439 /* ContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCell.swift; sourceTree = "<group>"; };
 		A6F1B893210FA3D300719439 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		C639F6AC53D1E2A645093CAA /* Pods_IguanaFixChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IguanaFixChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 			children = (
 				A64A712B210A8FF7006F256B /* IguanaFixClient.swift */,
 				A64A712D210A9003006F256B /* IguanaFixConstants.swift */,
+				A6E1ACC42117F22500318A43 /* Reachability.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				A6F1B891210F890200719439 /* ContactsCell.swift in Sources */,
 				A6F1B894210FA3D300719439 /* ContactDetailViewController.swift in Sources */,
 				A6CE49322112ADA90031053C /* ContactTheme.swift in Sources */,
+				A6E1ACC52117F22500318A43 /* Reachability.swift in Sources */,
 				A67ECA5F210E74A6008C6EE3 /* ContactObject.swift in Sources */,
 				A64A712E210A9003006F256B /* IguanaFixConstants.swift in Sources */,
 				A64A712C210A8FF7006F256B /* IguanaFixClient.swift in Sources */,
